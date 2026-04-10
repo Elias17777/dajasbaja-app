@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash_gradient">
+
+    <!-- Contenido central -->
+    <LinearLayout
+        android:id="@+id/splashContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:alpha="0"
+        android:paddingHorizontal="40dp">
+
+        <!-- Emoji chef animado -->
+        <TextView
+            android:id="@+id/tvChef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧑‍🍳"
+            android:textSize="88sp"
+            android:layout_marginBottom="8dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5" />
+
+        <!-- Llamas -->
+        <TextView
+            android:id="@+id/tvFire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔥  🔥  🔥"
+            android:textSize="28sp"
+            android:layout_marginBottom="32dp"
+            android:alpha="0" />
+
+        <!-- Nombre de la app -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EvoLab"
+            android:textColor="#FFFFFF"
+            android:textSize="52sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I + D"
+            android:textColor="#F0A500"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Tagline -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Innovación · Evolución · I+D"
+            android:textColor="#80FFFFFF"
+            android:textSize="13sp"
+            android:letterSpacing="0.1" />
+
+    </LinearLayout>
+
+    <!-- Familia Martínez en la parte inferior -->
+    <TextView
+        android:id="@+id/tvBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="36dp"
+        android:text="Familia Martínez"
+        android:textColor="#60FFFFFF"
+        android:textSize="12sp"
+        android:letterSpacing="0.15"
+        android:alpha="0" />
+
+</FrameLayout>

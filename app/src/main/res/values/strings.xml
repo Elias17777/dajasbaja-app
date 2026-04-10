@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dar de baja · I+D</string>
-    <string name="config_title">Configuración SMTP</string>
+    <string name="app_name">EvoLab I+D</string>
+    <string name="config_title">Configuración de correo</string>
+    <string name="splash_tagline">Innovación · Evolución · I+D</string>
 </resources>

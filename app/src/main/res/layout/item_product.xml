@@ -29,7 +29,8 @@
                 android:text="Producto 1"
                 android:textColor="@color/primary"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/btnDeleteProduct"
