@@ -282,8 +282,8 @@ class MainActivity : AppCompatActivity() {
                 )
                 progress.dismiss()
                 AlertDialog.Builder(this@MainActivity)
-                    .setTitle("✓ Pedido enviado")
-                    .setMessage("El correo se ha enviado correctamente a procesos@platostradicionales.com")
+                    .setTitle("✓ Correo enviado")
+                    .setMessage("Correo capturado por el servidor de pruebas.\n\nPara verlo: abre ethereal.email → Messages (sesión rhoda.hand@ethereal.email).\n\nCuando uses el servidor definitivo llegará directamente a procesos@platostradicionales.com")
                     .setPositiveButton("Nuevo pedido") { _, _ -> resetForm() }
                     .setCancelable(false)
                     .show()

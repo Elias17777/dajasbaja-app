@@ -56,15 +56,20 @@
             android:scaleType="centerCrop"
             android:visibility="gone" />
 
-        <!-- Botón seleccionar foto -->
-        <Button
+        <!-- Botón seleccionar foto (outline Material) -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSelectPhoto"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginBottom="10dp"
             android:text="📷  Seleccionar foto"
             android:textColor="@color/primary"
-            android:background="@drawable/bg_btn_outline" />
+            android:textAllCaps="false"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1.5dp"
+            app:cornerRadius="8dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto" />
 
         <!-- Campo Kg -->
         <LinearLayout
