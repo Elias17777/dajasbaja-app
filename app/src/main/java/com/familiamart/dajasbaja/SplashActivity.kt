@@ -84,16 +84,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateNext() {
-        // Autoconfigurar credenciales de prueba si aún no hay ninguna
+        // Autoconfigurar credenciales de prueba (escritura síncrona antes de navegar)
         autoConfigureIfNeeded()
+        // Siempre ir a MainActivity; MainActivity redirige a Config si faltan credenciales
         startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }
 
     /**
-     * En el primer arranque guarda automáticamente las credenciales de prueba
-     * (Ethereal Email — servidor SMTP de test, los correos se ven en ethereal.email/messages)
+     * Guarda credenciales Ethereal en primer arranque.
+     * Usa commit() en lugar de apply() para garantizar escritura síncrona
+     * antes de que MainActivity lea los prefs.
      */
     private fun autoConfigureIfNeeded() {
         try {
@@ -106,10 +108,11 @@ class SplashActivity : AppCompatActivity() {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
             if ((prefs.getString("email", "") ?: "").isEmpty()) {
+                // commit() es síncrono — garantiza que los datos estén escritos antes de continuar
                 prefs.edit()
                     .putString("email",    "rhoda.hand@ethereal.email")
                     .putString("password", "NWKgJy8DD4fsBurXfF")
-                    .apply()
+                    .commit()
             }
         } catch (_: Exception) { }
     }
