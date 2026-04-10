@@ -31,7 +31,7 @@ object EmailSender {
         photoUris:  List<Uri>
     ) = withContext(Dispatchers.IO) {
 
-        // --- Configuración SMTP para Office 365 (STARTTLS en puerto 587) ---
+        // --- Configuración SMTP para Gmail (STARTTLS en puerto 587) ---
         val props = Properties().apply {
             put("mail.smtp.auth",                "true")
             put("mail.smtp.starttls.enable",     "true")

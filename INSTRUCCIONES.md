@@ -29,14 +29,46 @@
 
 ---
 
-## Primera configuración en el móvil
+## Primera configuración: Crear cuenta Gmail y Contraseña de aplicación
+
+La app usa Gmail como servidor de envío. Necesitas **una cuenta Gmail dedicada** y una **Contraseña de aplicación** (distinta a la contraseña normal).
+
+### Paso 1 — Crear la cuenta Gmail (5 minutos)
+
+1. Ve a https://accounts.google.com/signup en tu móvil o PC
+2. Crea una cuenta con un nombre identificativo, por ejemplo:
+   - `dajasbaja.familiamart@gmail.com`
+   - `pedidos.id.familiamart@gmail.com`
+3. Completa el registro (necesitarás un número de teléfono para verificación)
+4. **Guarda bien el email y la contraseña** de esta cuenta nueva
+
+### Paso 2 — Activar la verificación en dos pasos (obligatorio para App Passwords)
+
+1. Inicia sesión en https://myaccount.google.com con la cuenta recién creada
+2. Ve a **Seguridad** (menú de la izquierda)
+3. En "¿Cómo inicias sesión en Google?", pulsa **Verificación en dos pasos**
+4. Sigue los pasos y actívala (puedes usar SMS)
+
+### Paso 3 — Generar la Contraseña de aplicación
+
+1. En https://myaccount.google.com → **Seguridad**
+2. Busca **Contraseñas de aplicación** (aparece solo si tienes activada la verificación en 2 pasos)
+3. Pulsa "Contraseñas de aplicación"
+4. En el desplegable "Seleccionar aplicación" → elige **Correo**
+5. En "Seleccionar dispositivo" → elige **Otro (nombre personalizado)** → escribe `DarDeBaja`
+6. Pulsa **Generar**
+7. Aparecerá una contraseña de **16 caracteres** (ejemplo: `abcd efgh ijkl mnop`)
+   - **Cópiala ahora** — solo se muestra una vez
+   - Los espacios no importan, puedes copiarla tal cual
+
+### Paso 4 — Configurar la app en el móvil
 
 Al abrir la app por primera vez, aparecerá automáticamente la pantalla de configuración:
 
-- **Email remitente:** el correo desde el que se enviarán los pedidos (ej: pedidos@familia-martinez.es)
-- **Contraseña:** la contraseña de esa cuenta de Outlook/Office 365
+- **Email remitente:** el Gmail que acabas de crear (ej: `dajasbaja.familiamart@gmail.com`)
+- **Contraseña:** la **Contraseña de aplicación** de 16 caracteres (NO la contraseña normal de Gmail)
 
-> El servidor SMTP ya está configurado: smtp.office365.com · Puerto 587 · TLS
+> El servidor SMTP ya está configurado: smtp.gmail.com · Puerto 587 · TLS
 
 Pulsa "Guardar configuración" y ya está lista para usar.
 
@@ -64,3 +96,4 @@ Pulsa "Guardar configuración" y ya está lista para usar.
 - La app requiere conexión a internet para enviar
 - Compatible con Android 7.0 en adelante
 - Si el envío falla, la app mostrará el error real (credenciales incorrectas, sin conexión, etc.)
+- **Importante:** usa siempre la Contraseña de aplicación de Gmail, nunca la contraseña normal

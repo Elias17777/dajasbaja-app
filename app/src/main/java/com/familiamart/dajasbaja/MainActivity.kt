@@ -271,7 +271,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 EmailSender.sendEmail(
                     context       = this@MainActivity,
-                    smtpHost      = "smtp.office365.com",
+                    smtpHost      = "smtp.gmail.com",
                     smtpPort      = 587,
                     fromEmail     = email,
                     password      = password,
