@@ -31,7 +31,7 @@ object EmailSender {
         photoUris:  List<Uri>
     ) = withContext(Dispatchers.IO) {
 
-        // --- Configuración SMTP para Brevo (STARTTLS en puerto 587) ---
+        // --- Configuración SMTP para Ethereal (STARTTLS en puerto 587, servidor de pruebas) ---
         val props = Properties().apply {
             put("mail.smtp.auth",                "true")
             put("mail.smtp.starttls.enable",     "true")

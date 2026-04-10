@@ -84,15 +84,19 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateNext() {
-        val target = if (isConfigured()) MainActivity::class.java else ConfigActivity::class.java
-        startActivity(Intent(this, target))
-        // Transición suave
+        // Autoconfigurar credenciales de prueba si aún no hay ninguna
+        autoConfigureIfNeeded()
+        startActivity(Intent(this, MainActivity::class.java))
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         finish()
     }
 
-    private fun isConfigured(): Boolean {
-        return try {
+    /**
+     * En el primer arranque guarda automáticamente las credenciales de prueba
+     * (Ethereal Email — servidor SMTP de test, los correos se ven en ethereal.email/messages)
+     */
+    private fun autoConfigureIfNeeded() {
+        try {
             val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
             val prefs = EncryptedSharedPreferences.create(
                 "app_prefs",
@@ -101,9 +105,12 @@ class SplashActivity : AppCompatActivity() {
                 EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             )
-            (prefs.getString("email", "") ?: "").isNotEmpty()
-        } catch (e: Exception) {
-            false
-        }
+            if ((prefs.getString("email", "") ?: "").isEmpty()) {
+                prefs.edit()
+                    .putString("email",    "rhoda.hand@ethereal.email")
+                    .putString("password", "NWKgJy8DD4fsBurXfF")
+                    .apply()
+            }
+        } catch (_: Exception) { }
     }
 }

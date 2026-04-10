@@ -271,7 +271,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 EmailSender.sendEmail(
                     context       = this@MainActivity,
-                    smtpHost      = "smtp-relay.brevo.com",
+                    smtpHost      = "smtp.ethereal.email",
                     smtpPort      = 587,
                     fromEmail     = email,
                     password      = password,

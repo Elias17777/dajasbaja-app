@@ -25,7 +25,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/bg_field_disabled"
             android:padding="12dp"
-            android:text="smtp-relay.brevo.com  —  Puerto 587  —  TLS"
+            android:text="smtp.ethereal.email  —  Puerto 587  —  TLS"
             android:textColor="@color/text_dark"
             android:textSize="14sp" />
 
