@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var productsContainer: LinearLayout
     private lateinit var btnCocina: Button
     private lateinit var btnRecepciones: Button
+    private lateinit var btnCamara: Button
     private var selectedDepartment = "Cocina"
 
     // -------------------------------------------------------------------------
@@ -83,10 +84,12 @@ class MainActivity : AppCompatActivity() {
         productsContainer = findViewById(R.id.productsContainer)
         btnCocina         = findViewById(R.id.btnCocina)
         btnRecepciones    = findViewById(R.id.btnRecepciones)
+        btnCamara         = findViewById(R.id.btnCamara)
 
         // Toggle departamento
         btnCocina.setOnClickListener      { selectDepartment("Cocina") }
         btnRecepciones.setOnClickListener { selectDepartment("Recepciones") }
+        btnCamara.setOnClickListener      { selectDepartment("Cámara") }
         selectDepartment("Cocina")
 
         // Añadir primer producto por defecto
@@ -109,17 +112,19 @@ class MainActivity : AppCompatActivity() {
     // -------------------------------------------------------------------------
     private fun selectDepartment(dept: String) {
         selectedDepartment = dept
-        if (dept == "Cocina") {
-            btnCocina.setBackgroundResource(R.drawable.bg_btn_selected)
-            btnCocina.setTextColor(ContextCompat.getColor(this, R.color.white))
-            btnRecepciones.setBackgroundResource(R.drawable.bg_btn_unselected)
-            btnRecepciones.setTextColor(ContextCompat.getColor(this, R.color.text_dark))
-        } else {
-            btnRecepciones.setBackgroundResource(R.drawable.bg_btn_selected)
-            btnRecepciones.setTextColor(ContextCompat.getColor(this, R.color.white))
-            btnCocina.setBackgroundResource(R.drawable.bg_btn_unselected)
-            btnCocina.setTextColor(ContextCompat.getColor(this, R.color.text_dark))
+        // Resetear todos a no-seleccionado
+        listOf(btnCocina, btnRecepciones, btnCamara).forEach { btn ->
+            btn.setBackgroundResource(R.drawable.bg_btn_unselected)
+            btn.setTextColor(ContextCompat.getColor(this, R.color.text_dark))
         }
+        // Marcar el seleccionado
+        val selected = when (dept) {
+            "Cocina"      -> btnCocina
+            "Recepciones" -> btnRecepciones
+            else          -> btnCamara
+        }
+        selected.setBackgroundResource(R.drawable.bg_btn_selected)
+        selected.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
 
     // -------------------------------------------------------------------------
