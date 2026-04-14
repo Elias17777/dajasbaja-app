@@ -74,44 +74,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp"
-        android:gravity="center_vertical">
+        android:paddingBottom="8dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cámara:"
+            android:text="Cámara"
             android:textColor="@color/text_dark"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginBottom="6dp" />
 
-        <TextView
-            android:id="@+id/tvCamaraInfo"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/etCamara"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sin info"
-            android:textColor="@color/text_hint"
+            android:hint="Ej: Cámara 2, -18°C, pasillo B..."
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="2"
+            android:maxLines="4"
+            android:gravity="top|start"
+            android:background="@drawable/bg_field"
+            android:padding="12dp"
             android:textSize="14sp"
-            android:ellipsize="end"
-            android:maxLines="1" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCamara"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:text="Editar"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:textColor="@color/primary"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="1.5dp"
-            app:cornerRadius="8dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto" />
+            android:textColor="@color/text_dark"
+            android:textColorHint="@color/text_hint" />
 
     </LinearLayout>
 
