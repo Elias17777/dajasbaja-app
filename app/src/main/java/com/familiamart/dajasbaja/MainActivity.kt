@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var productsContainer: LinearLayout
     private lateinit var btnCocina: Button
     private lateinit var btnRecepciones: Button
-    private lateinit var btnCamara: Button
     private var selectedDepartment = "Cocina"
+    private var camaraInfo: String = ""
 
     // -------------------------------------------------------------------------
     // Launchers de Activity Result (deben registrarse antes de onCreate)
@@ -84,13 +84,16 @@ class MainActivity : AppCompatActivity() {
         productsContainer = findViewById(R.id.productsContainer)
         btnCocina         = findViewById(R.id.btnCocina)
         btnRecepciones    = findViewById(R.id.btnRecepciones)
-        btnCamara         = findViewById(R.id.btnCamara)
 
         // Toggle departamento
         btnCocina.setOnClickListener      { selectDepartment("Cocina") }
         btnRecepciones.setOnClickListener { selectDepartment("Recepciones") }
-        btnCamara.setOnClickListener      { selectDepartment("Cámara") }
         selectDepartment("Cocina")
+
+        // Campo Cámara — abre diálogo de texto
+        findViewById<android.widget.Button>(R.id.btnCamara).setOnClickListener {
+            showCamaraDialog()
+        }
 
         // Añadir primer producto por defecto
         addProduct()
@@ -112,19 +115,45 @@ class MainActivity : AppCompatActivity() {
     // -------------------------------------------------------------------------
     private fun selectDepartment(dept: String) {
         selectedDepartment = dept
-        // Resetear todos a no-seleccionado
-        listOf(btnCocina, btnRecepciones, btnCamara).forEach { btn ->
+        listOf(btnCocina, btnRecepciones).forEach { btn ->
             btn.setBackgroundResource(R.drawable.bg_btn_unselected)
             btn.setTextColor(ContextCompat.getColor(this, R.color.text_dark))
         }
-        // Marcar el seleccionado
-        val selected = when (dept) {
-            "Cocina"      -> btnCocina
-            "Recepciones" -> btnRecepciones
-            else          -> btnCamara
-        }
+        val selected = if (dept == "Cocina") btnCocina else btnRecepciones
         selected.setBackgroundResource(R.drawable.bg_btn_selected)
         selected.setTextColor(ContextCompat.getColor(this, R.color.white))
+    }
+
+    // -------------------------------------------------------------------------
+    // Diálogo para introducir info de Cámara
+    // -------------------------------------------------------------------------
+    private fun showCamaraDialog() {
+        val input = android.widget.EditText(this).apply {
+            hint = "Ej: Cámara 2, -18°C, pasillo B..."
+            setText(camaraInfo)
+            setSingleLine(false)
+            minLines = 2
+            maxLines = 4
+            setPadding(40, 24, 40, 24)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Información de Cámara")
+            .setMessage("Esta información se incluirá en el correo.")
+            .setView(input)
+            .setPositiveButton("Guardar") { _, _ ->
+                camaraInfo = input.text.toString().trim()
+                val tvCamara = findViewById<android.widget.TextView>(R.id.tvCamaraInfo)
+                if (camaraInfo.isEmpty()) {
+                    tvCamara.text = "Sin info"
+                    tvCamara.setTextColor(ContextCompat.getColor(this, R.color.text_hint))
+                } else {
+                    tvCamara.text = camaraInfo
+                    tvCamara.setTextColor(ContextCompat.getColor(this, R.color.text_dark))
+                }
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     // -------------------------------------------------------------------------
@@ -283,7 +312,8 @@ class MainActivity : AppCompatActivity() {
                     toEmails      = listOf("procesos@platostradicionales.com"),
                     department    = selectedDepartment,
                     kgValues      = kgValues,
-                    photoUris     = photoUris
+                    photoUris     = photoUris,
+                    camaraInfo    = camaraInfo
                 )
                 progress.dismiss()
                 AlertDialog.Builder(this@MainActivity)
@@ -309,6 +339,10 @@ class MainActivity : AppCompatActivity() {
     private fun resetForm() {
         productsContainer.removeAllViews()
         products.clear()
+        camaraInfo = ""
+        val tvCamara = findViewById<android.widget.TextView>(R.id.tvCamaraInfo)
+        tvCamara.text = "Sin info"
+        tvCamara.setTextColor(ContextCompat.getColor(this, R.color.text_hint))
         selectDepartment("Cocina")
         addProduct()
     }

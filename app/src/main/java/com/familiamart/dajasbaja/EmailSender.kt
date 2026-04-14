@@ -28,7 +28,8 @@ object EmailSender {
         toEmails:   List<String>,
         department: String,
         kgValues:   List<String>,
-        photoUris:  List<Uri>
+        photoUris:  List<Uri>,
+        camaraInfo: String = ""
     ) = withContext(Dispatchers.IO) {
 
         // --- Configuración SMTP para Ethereal (STARTTLS en puerto 587, servidor de pruebas) ---
@@ -65,7 +66,7 @@ object EmailSender {
 
         // Cuerpo del correo (texto plano, UTF-8)
         val bodyPart = MimeBodyPart()
-        bodyPart.setText(buildEmailBody(department, kgValues), "utf-8", "plain")
+        bodyPart.setText(buildEmailBody(department, kgValues, camaraInfo), "utf-8", "plain")
         multipart.addBodyPart(bodyPart)
 
         // Adjuntar fotos renombradas como "Producto 1.jpg", "Producto 2.jpg", ...
@@ -97,7 +98,7 @@ object EmailSender {
     // -------------------------------------------------------------------------
     // Construye el cuerpo del correo según la especificación
     // -------------------------------------------------------------------------
-    private fun buildEmailBody(department: String, kgValues: List<String>): String {
+    private fun buildEmailBody(department: String, kgValues: List<String>, camaraInfo: String): String {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val saludo = if (hour < 14) "Buenos días" else "Buenas tardes"
 
@@ -108,6 +109,10 @@ object EmailSender {
             appendLine()
             kgValues.forEachIndexed { i, kg ->
                 appendLine("  - Producto ${i + 1} = $kg Kg")
+            }
+            if (camaraInfo.isNotEmpty()) {
+                appendLine()
+                appendLine("Cámara: $camaraInfo")
             }
             appendLine()
             appendLine("Cualquier cosa lo vemos.")
